@@ -1,0 +1,60 @@
+The task is to parse a log file and produce a report with the min/max and average response times
+for the transactions in the file.   Also generate a list of the number of transactions per second for 0 to 30 seconds.  For example:
+
+---- start
+Output:   min/max/average after processing XXX transactions.
+   Time      Txns
+     0         1
+	 1         20
+	 2         50
+	 
+---- end
+
+All of the transactions and replies are logged with a timestamp and a key (the MSN field) will tie them together.   It should be assumed that there are responses without a transaction and transactions without a response. This is not an error.
+
+
+An input transaction looks like  (note that new lines are added for readability):
+
+------- start
+@{010813124706$RQMS 0018437HDRA2|
+GDSWB|SGAR7|HRSQ|IAT848537|GMT081947|MSN160A0EC77BAA83|UTTA||
+PALSRQ|GDA00212920|GDII|CHNQ|PIDFL307|IND22MAR13|OTD24MAR13|NNT2|RPCOBH|RPIN|
+CCN00212920|NCUUSD|ROC2|NPR2|NRM1|MTQE||}@
+------- end
+
+With the key being the "RQMS" as the request.
+
+A reply to the above transaction looks like:
+
+------ start
+@{010813124706$RPMS 0131903HDRA2|
+GDSWB|SGAR7|HRSQ|IAT848537|GMT081947|MSN160A0EC77BAA83|UTTA||
+PALSRP|SEG01|PIDFL307|RPCOBH|RP1Orbitz Saver Rate|NCUUSD|CMRN|RRPOBH||
+RTRCRP|SEG01|RTCZ112OBH|
+RD11 King Bed /Smoking Room/Sofabed-2Person|RD2/Free High-Speed Wireless|
+RMR67.99|TRR135.98|TTX14.96|TRI150.94|FLGXG|CXT24H||
+.
+.
+.
+RTRCRP|SEG01|RTCZE12OBH|RD11 King Bed /No Smoking/1 Bedroom Suite|RD2/Living Room/Free High-Speed Wireless|RMR79.99|TRR159.98|TTX17.60|TRI177.58|FLGXG|CXT24H||}@
+------ end
+
+The key that this is a response is the "RPMS".
+
+Both transactions can be tied together by the MSN field being the same (MSN160A0EC77BAA83)
+
+The timestamp is in position 3 to the $ character and is of the format MMDDYYYYMMSS.  
+
+Due to the one second logging resolution we recognize that there will be some transactions with a zero second response time.  This should not be considered a bug.
+
+Notes:
+1:  Speed of processing is important
+2:  Code should compile on a Linux or Solaris environment
+3:  Justify any non-standard libraries used
+4:  A Readme.txt with developer notes, etc would be a plus.
+5:  The application should be in a state to be able to be deployed to production.   
+
+
+
+
+
