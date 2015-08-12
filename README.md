@@ -1,7 +1,7 @@
 impromptu-parse
 ===============
 
-This was an impromptu code challenge, c coding test to parse a
+This was an impromptu code challenge, a c coding test to parse a
 transactional log file that Choice Hotels has to deal with.
 
 ===============
